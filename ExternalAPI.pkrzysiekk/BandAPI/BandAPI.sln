@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandAPI", "BandAPI.csproj", "{A70FB102-2BBD-4B61-8696-61C54CE2EBAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A70FB102-2BBD-4B61-8696-61C54CE2EBAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A70FB102-2BBD-4B61-8696-61C54CE2EBAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A70FB102-2BBD-4B61-8696-61C54CE2EBAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A70FB102-2BBD-4B61-8696-61C54CE2EBAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
