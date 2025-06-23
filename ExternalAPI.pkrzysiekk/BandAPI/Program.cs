@@ -1,4 +1,5 @@
 using BandAPI.Data;
+using BandAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<BandContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IBandRepository, BandRepository>();
 
 var app = builder.Build();
 
@@ -19,6 +21,11 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<BandContext>(); 
+    context.Initialize();
+}
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
