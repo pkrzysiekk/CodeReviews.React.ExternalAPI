@@ -1,6 +1,7 @@
 using BandAPI.Data;
 using BandAPI.Repository;
 using Microsoft.EntityFrameworkCore;
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,14 @@ builder.Services.AddDbContext<BandContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IBandRepository, BandRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173");
+        });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,7 +36,7 @@ using (var scope = app.Services.CreateScope())
     context.Initialize();
 }
 app.UseHttpsRedirection();
-
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 
 app.MapControllers();

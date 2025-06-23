@@ -12,7 +12,7 @@ public class BandContext : DbContext
  public void Initialize()
  {
   this.Database.EnsureCreated();
-
+  
   var bands = new List<Band>
   {
    new Band
@@ -64,7 +64,8 @@ public class BandContext : DbContext
     imageURL = "https://upload.wikimedia.org/wikipedia/en/6/6b/Disturbed-logo.svg"
    }
   };
-
+  var items=this.Bands.ToList();
+  this.RemoveRange(items);
   this.AddRange(bands);
   this.SaveChanges();
  }
