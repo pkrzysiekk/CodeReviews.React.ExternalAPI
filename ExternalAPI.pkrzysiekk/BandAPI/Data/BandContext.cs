@@ -8,5 +8,5 @@ public class BandContext :DbContext
  public BandContext(DbContextOptions<BandContext> options)  : base(options)
  {
  }
- DbSet<Band> Band { get; set; }
+ public DbSet<Band> Bands { get; set; }
 }
