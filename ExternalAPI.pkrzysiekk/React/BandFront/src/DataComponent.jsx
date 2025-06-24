@@ -33,12 +33,14 @@ export default function DataComponent() {
   }
   return (
     <>
-      <div className="left-side">
-        <FetchButton handleFetchClick={handleClick} />
-        <TableData fetchedData={data} getBandDetails={handleGetDetails} />
-      </div>
-      <div className="right-side">
-        {selectedBand && <BandCard bandData={selectedBand} />}
+      <div className="main">
+        <div className="left-side">
+          <FetchButton handleFetchClick={handleClick} />
+          <TableData fetchedData={data} getBandDetails={handleGetDetails} />
+        </div>
+        <div className="right-side">
+          {selectedBand && <BandCard bandData={selectedBand} />}
+        </div>
       </div>
     </>
   );
