@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 
 export default function DataComponent() {
-  const [data, SetData] = useState([]);
+  const [data, setData] = useState([]);
+  const [selectedBand, setSelectedBand] = useState(null);
 
   const handleClick = async () => {
     const fetchedData = await getData();
-    SetData(fetchedData);
+    setData(fetchedData);
   };
+
+  const handleGetDetails = (id) => {
+    const bandDetails = data.find((band) => band.id == id);
+    setSelectedBand(bandDetails);
+  };
+
   useEffect(() => {
     console.log(data);
   }, [data]);
@@ -26,8 +33,13 @@ export default function DataComponent() {
   }
   return (
     <>
-      <FetchButton handleFetchClick={handleClick} />
-      <TableData fetchedData={data} />
+      <div className="left-side">
+        <FetchButton handleFetchClick={handleClick} />
+        <TableData fetchedData={data} getBandDetails={handleGetDetails} />
+      </div>
+      <div className="right-side">
+        {selectedBand && <BandCard bandData={selectedBand} />}
+      </div>
     </>
   );
 }
@@ -49,7 +61,7 @@ function TableData({ fetchedData, getBandDetails }) {
       <td>
         <button
           onClick={() => {
-            getBandDetails;
+            getBandDetails(band.id);
           }}
         >
           Details
@@ -70,6 +82,20 @@ function TableData({ fetchedData, getBandDetails }) {
         </thead>
         <tbody>{tableBody}</tbody>
       </table>
+    </div>
+  );
+}
+
+function BandCard({ bandData }) {
+  console.log(bandData);
+  return (
+    <div className="band-card">
+      <div className="card-image">
+        <img src={bandData.imageURL} />
+      </div>
+      <div className="card-info">
+        <h3>{bandData.name}</h3>
+      </div>
     </div>
   );
 }
