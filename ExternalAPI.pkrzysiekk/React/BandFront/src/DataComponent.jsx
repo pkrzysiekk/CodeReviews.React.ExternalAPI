@@ -24,7 +24,12 @@ export default function DataComponent() {
       alert(error);
     }
   }
-  return <FetchButton handleFetchClick={handleClick} />;
+  return (
+    <>
+      <FetchButton handleFetchClick={handleClick} />
+      <TableData fetchedData={data} />
+    </>
+  );
 }
 
 function FetchButton({ handleFetchClick }) {
@@ -32,5 +37,39 @@ function FetchButton({ handleFetchClick }) {
     <button className="fetch-button" onClick={handleFetchClick}>
       Fetch Data
     </button>
+  );
+}
+
+function TableData({ fetchedData, getBandDetails }) {
+  const tableBody = fetchedData.map((band, index) => (
+    <tr key={index}>
+      <td>{index + 1}</td>
+      <td>{band.name}</td>
+      <td>{band.genre}</td>
+      <td>
+        <button
+          onClick={() => {
+            getBandDetails;
+          }}
+        >
+          Details
+        </button>
+      </td>
+    </tr>
+  ));
+  return (
+    <div className="table-data">
+      <table>
+        <thead>
+          <tr>
+            <th>Ordinal</th>
+            <th>Name</th>
+            <th>Genre</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>{tableBody}</tbody>
+      </table>
+    </div>
   );
 }
