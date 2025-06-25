@@ -26,9 +26,14 @@ public class BandRepository : IBandRepository
 
     public async Task UpdateBand(Band band)
     {
-        var b = await GetBandById(band.Id);
-        if (b != null) b = band;
-        await _context.SaveChangesAsync();
+        var existing = await GetBandById(band.Id);
+        if (existing != null)
+        {
+            existing.Name = band.Name;
+            existing.Genre = band.Genre;
+            existing.imageURL = band.imageURL;
+            await _context.SaveChangesAsync();
+        }
     }
 
     public async Task DeleteBand(Band band)
