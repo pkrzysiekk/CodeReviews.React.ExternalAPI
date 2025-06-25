@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 export default function DataComponent() {
   const [data, setData] = useState([]);
   const [selectedBand, setSelectedBand] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = async () => {
+    setIsLoading(true);
     const fetchedData = await getData();
     setData(fetchedData);
+    setIsLoading(false);
   };
 
   const handleGetDetails = (id) => {
@@ -35,7 +38,10 @@ export default function DataComponent() {
     <>
       <div className="main">
         <div className="left-side">
-          <TableData fetchedData={data} getBandDetails={handleGetDetails} />
+          {data.length === 0 || (
+            <TableData fetchedData={data} getBandDetails={handleGetDetails} />
+          )}
+          {isLoading && <p className="loading-p">Loading Data...</p>}
           <FetchButton handleFetchClick={handleClick} />
         </div>
         <div className="right-side">
