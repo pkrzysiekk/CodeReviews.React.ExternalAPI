@@ -1,3 +1,6 @@
+body {
+  background-color: #e1dfdf;
+}
 .main {
   display: flex;
   gap: 4rem;
@@ -9,6 +12,7 @@
 
 .right-side {
   float: left;
+  display: flex;
 }
 
 .band-card {
@@ -34,4 +38,11 @@ table,
 th,
 td {
   border: 1px solid black;
+}
+.fetch-button {
+  width: 100%;
+  height: 4rem;
+  margin-top: 5%;
+
+  text-align: center;
 }
